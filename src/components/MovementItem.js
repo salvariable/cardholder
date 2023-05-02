@@ -1,22 +1,31 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {Image} from './Image';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {MyImage} from './MyImage';
+import {useNavigation} from '@react-navigation/native';
 
-export const MovementItem = () => {
+export const MovementItem = item => {
+  const {product, createdAt, points, image, isRedemption} = item;
+  const navigation = useNavigation();
+
   return (
-    <View style={styles.container}>
-      <Image />
-      <View>
-        <Text style={styles.title}>Nombre del producto</Text>
-        <Text>26 de enero, 2019</Text>
-      </View>
+    <TouchableOpacity onPress={() => navigation.navigate('Details', {item})}>
       <View style={styles.container}>
-        <Text>+100</Text>
+        <MyImage size={50} source={image} />
+        <View>
+          <Text style={styles.title}>{product}</Text>
+          <Text>{createdAt}</Text>
+        </View>
+        <View style={styles.container}>
+          <Text>
+            {isRedemption ? '+' : '-'}
+            {points}
+          </Text>
+        </View>
+        <View>
+          <Text>Icon</Text>
+        </View>
       </View>
-      <View>
-        <Text>Icon</Text>
-      </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
