@@ -38,7 +38,7 @@ export const Details = props => {
           shadowOpacity: 0.5,
           shadowRadius: 4,
         }}>
-        <MyImage size={200} source={image} />
+        <MyImage testID={'details-image'} size={200} source={image} />
       </View>
 
       <View style={{flex: 0, marginBottom: 24}}>
@@ -56,6 +56,7 @@ export const Details = props => {
           marginHorizontal: -8,
         }}>
         <MyButton
+          testID={'details-button'}
           title="Aceptar"
           onPress={() => navigation.navigate('Dashboard')}
         />

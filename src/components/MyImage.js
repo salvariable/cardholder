@@ -7,11 +7,11 @@ const thumbnail =
 export const MyImage = ({size, source = thumbnail}) => {
   return (
     <Image
+      testID="my-image"
       source={{uri: source}}
       style={{
         width: size,
         height: size,
-
         borderRadius: size > 60 ? 0 : 10,
       }}
     />

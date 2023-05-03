@@ -14,6 +14,7 @@ export const MovementsList = ({data}) => {
       <View style={styles.container}>
         <View style={styles.container}>
           <FlatList
+            testID={'movements-list-flatlist'}
             data={filteredData}
             keyExtractor={(item, index) => index.toString()}
             renderItem={({item}) => <MovementItem {...item} />}
@@ -23,12 +24,24 @@ export const MovementsList = ({data}) => {
       {(filter === null || filter === true || filter === false) && (
         <View style={styles.filterContainer}>
           {filter !== null && (
-            <MyButton title="Todos" onPress={() => setFilter(null)} />
+            <MyButton
+              title="Todos"
+              testID={'movements-list-button-all'}
+              onPress={() => setFilter(null)}
+            />
           )}
           {filter === null && (
             <View style={styles.buttonGroup}>
-              <MyButton title="Ganados" onPress={() => setFilter(false)} />
-              <MyButton title="Canjeados" onPress={() => setFilter(true)} />
+              <MyButton
+                title="Ganados"
+                testID={'movements-list-button-earned'}
+                onPress={() => setFilter(false)}
+              />
+              <MyButton
+                title="Canjeados"
+                testID={'movements-list-button-redeemed'}
+                onPress={() => setFilter(true)}
+              />
             </View>
           )}
         </View>

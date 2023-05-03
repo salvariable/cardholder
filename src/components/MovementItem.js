@@ -13,24 +13,35 @@ export const MovementItem = item => {
   const date = dayjs(createdAt).locale('es').format('DD [de] MMMM, YYYY');
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Details', {item})}>
+    <TouchableOpacity
+      testID="movement-item-touchable"
+      onPress={() => navigation.navigate('Details', {item})}>
       <View style={styles.container}>
         <View style={styles.imageContainer}>
-          <MyImage size={55} source={image} />
+          <MyImage size={55} source={image} testID={'movement-item-image'} />
         </View>
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{product}</Text>
-          <Text style={styles.date}>{date}</Text>
+          <Text style={styles.title} testID="movement-item-product">
+            {product}
+          </Text>
+          <Text style={styles.date} testID="movement-item-date">
+            {date}
+          </Text>
         </View>
         <View style={styles.pointsContainer}>
           <Text
+            testID="movement-item-points-indicator"
             style={[
               styles.points,
               is_redemption ? styles.negative : styles.positive,
             ]}>
             {is_redemption ? '-' : '+'}
           </Text>
-          <Text style={[styles.points, styles.neutral]}>{points}</Text>
+          <Text
+            style={[styles.points, styles.neutral]}
+            testID="movement-item-points">
+            {points}
+          </Text>
           <Icon name="chevron-right" size={40} color="#070707" />
         </View>
       </View>

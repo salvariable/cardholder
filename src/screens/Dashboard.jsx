@@ -1,24 +1,16 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  StyleSheet,
-  ActivityIndicator,
-} from 'react-native';
+import {Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import {MainCard} from '../components/MainCard';
 import useFetchProducts from '../hooks/getProducts';
 import {MovementsList} from '../components/MovementsList';
 import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const Dashboard = () => {
-  const {products, loading} = useFetchProducts();
+  const {products} = useFetchProducts();
 
   const totalPoints = products.reduce((acc, curr) => {
-    return !curr.is_redemption && acc + curr.points;
-    // return !curr.is_redemption ? acc + curr.points : acc - curr.points;
+    return !curr.is_redemption ? acc + curr.points : acc - curr.points;
   }, 0);
-
-  loading && <ActivityIndicator size="large" color="#0000ff" />;
 
   return (
     <SafeAreaView style={[styles.container, styles.spacing]}>

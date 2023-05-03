@@ -5,7 +5,7 @@ export const MainCard = ({points}) => {
   const cleanPoints = points.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="main-card-container">
       <Text style={styles.issued}>Diciembre</Text>
       <Text style={styles.amount}>{cleanPoints} pts</Text>
     </View>

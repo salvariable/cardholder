@@ -4,6 +4,7 @@ import {Text, View} from 'react-native';
 export const DetailsHeader = ({title}) => {
   return (
     <View
+      testID="details-header-container"
       style={{
         height: 130,
         backgroundColor: '#CFD6FF',
