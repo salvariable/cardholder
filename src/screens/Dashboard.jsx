@@ -1,62 +1,65 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {
   Text,
   View,
-  FlatList,
   StyleSheet,
   ActivityIndicator,
 } from 'react-native';
-import {MyButton} from '../components/MyButton';
 import {MainCard} from '../components/MainCard';
-import {MovementItem} from '../components/MovementItem';
-import {MOVEMENTS} from '../../assets/movements';
 import useFetchProducts from '../hooks/getProducts';
+import {MovementsList} from '../components/MovementsList';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export const Dashboard = () => {
   const {products, loading} = useFetchProducts();
 
+  const totalPoints = products.reduce((acc, curr) => {
+    return !curr.is_redemption && acc + curr.points;
+    // return !curr.is_redemption ? acc + curr.points : acc - curr.points;
+  }, 0);
+
   loading && <ActivityIndicator size="large" color="#0000ff" />;
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Bienvenido de vuelta!</Text>
-      <Text>Ruben Rodríguez</Text>
+    <SafeAreaView style={[styles.container, styles.spacing]}>
+      <Text style={styles.title}>¡Bienvenido de vuelta!</Text>
+      <Text style={styles.name}>Ruben Rodríguez</Text>
 
       <Text style={styles.subtitle}>TUS PUNTOS</Text>
-      <MainCard />
+      <MainCard points={totalPoints} />
 
       <Text style={styles.subtitle}>TUS MOVIMIENTOS</Text>
-      <FlatList
-        data={products}
-        renderItem={({item}) => <MovementItem {...item} />}
-        keyExtractor={item => item.id}
-        contentContainerStyle={{flex: 1, paddingBottom: 16}}
-      />
-
-      <View style={styles.footer}>
-        <MyButton title="Ganados" />
-        <MyButton title="Canjeados" />
+      <View style={styles.container}>
+        <MovementsList data={products} />
       </View>
-    </View>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+  },
+  spacing: {
+    padding: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: '800',
+    fontSize: 20,
+    lineHeight: 27,
+    color: '#020202',
+  },
+  name: {
+    fontWeight: '400',
+    fontSize: 16,
+    lineHeight: 21.86,
+    color: '#020202',
   },
   subtitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: 'gray',
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    paddingVertical: 20,
+    fontWeight: '800',
+    fontSize: 14,
+    lineHeight: 19,
+    color: '#9B9898',
   },
 });

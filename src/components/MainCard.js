@@ -1,36 +1,45 @@
 import React from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 
-export const MainCard = () => {
+export const MainCard = ({points}) => {
+  const cleanPoints = points.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
   return (
     <View style={styles.container}>
       <Text style={styles.issued}>Diciembre</Text>
-      <Text style={styles.amount}>10,000.00 pts</Text>
+      <Text style={styles.amount}>{cleanPoints} pts</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: 'purple',
+    backgroundColor: '#334FFA',
+    width: 286,
+    height: 143,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10,
-    margin: 10,
+    alignSelf: 'center',
+    borderRadius: 20,
+    elevation: 4,
+    shadowColor: '#000000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
   },
   issued: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: '800',
+    fontSize: 16,
+    lineHeight: 22,
+    color: '#FFFFFF',
     position: 'absolute',
-    top: 0,
-    left: 0,
-    margin: 10,
+    top: 21,
+    left: 19,
   },
   amount: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    color: 'white',
+    fontWeight: '800',
+    fontSize: 32,
+    lineHeight: 44,
+    color: '#FFFFFF',
   },
 });
